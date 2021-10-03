@@ -1,5 +1,6 @@
 <?php
 /*
+//v211003 fixed deprecated constructors
 Jonmod 211002a - changed function testRow ($tablerow, $rowSchema = null) { (to avoid warnings)
 
 */
@@ -82,7 +83,8 @@ class Flatfile {
 	 */
 	var $datadir;
 
-	function Flatfile()
+	#function Flatfile()
+	public function __construct()
 	{
 		$this->schemata = array();
 	}
@@ -445,7 +447,8 @@ class NotWhere extends WhereClause
 	 * of the WhereClause object passed in when testing rows.
 	 * @param WhereClause $whereclause The WhereClause object to negate
 	 */
-	function NotWhere ($whereclause)
+	#function NotWhere ($whereclause)
+	public function __construct($whereclause)
 	{
 		$this->clause = $whereclause;
 	}
@@ -499,7 +502,8 @@ class SimpleWhereClause extends WhereClause
 	 * STRING_COMPARISON (default), NUMERIC COMPARISON or INTEGER_COMPARISON
 	 *
 	 */
-	function SimpleWhereClause ($field, $operator, $value, $compare_type = DEFAULT_COMPARISON)
+	#function SimpleWhereClause ($field, $operator, $value, $compare_type = DEFAULT_COMPARISON)
+	public function __construct($field, $operator, $value, $compare_type = DEFAULT_COMPARISON)
 	{
 		$this->field = $field;
 		$this->operator = $operator;
@@ -561,7 +565,8 @@ class LikeWhereClause extends WhereClause
 	 *                       wildcard, and is case insensitve.  e.g. 'test%' will match 'TESTS' and 'Testing'
 	 */
 
-	function LikeWhereClause ($field, $value)
+	#function LikeWhereClause ($field, $value)
+	public function __construct ($field, $value)
 	{
 		$this->field = $field;
 		$this->regexp = '/^' . str_replace('%','.*', preg_quote($value)) . '$/i';
@@ -596,7 +601,9 @@ class ListWhereClause extends WhereClause {
 	 * @param array $list		List of items
 	 * @param string $compare_type Comparison type, string by default.
 	 */
-	function ListWhereClause ($field, $list, $compare_type = DEFAULT_COMPARISON) {
+	#function ListWhereClause ($field, $list, $compare_type = DEFAULT_COMPARISON) 
+	public function __construct ($field, $list, $compare_type = DEFAULT_COMPARISON) 
+	{
 		$this->list = $list;
 		$this->field = (int)$field;
 		$this->compareAs = $compare_type;
@@ -673,7 +680,9 @@ class OrWhereClause extends CompositeWhereClause
 	 * Creates a new OrWhereClause 
 	 * @param WhereClause $whereClause,... optional unlimited list of WhereClause objects to be added
 	 */ 
-	function OrWhereClause() {
+	#function OrWhereClause() 
+	function __construct () 
+	{
 		$this->clauses = func_get_args();
 	}
 }
@@ -702,7 +711,9 @@ class AndWhereClause extends CompositeWhereClause
 	 * Creates a new AndWhereClause 
 	 * @param WhereClause $whereClause,... optional unlimited list of WhereClause objects to be added
 	 */ 
-	function AndWhereClause() {
+	#function AndWhereClause() 
+	function __construct () 
+	{
 		$this->clauses = func_get_args();
 	}
 }
@@ -736,7 +747,8 @@ class OrderBy {
 	 * @param int $compareAs	Comparison type: DEFAULT_COMPARISON, STRING_COMPARISON, INTEGER_COMPARISION,
 	 * or NUMERIC_COMPARISON, or the name of a user defined function that you want to use for doing the comparison.
 	 */
-	function OrderBy($field, $orderType, $compareAs = DEFAULT_COMPARISON)
+	#function OrderBy($field, $orderType, $compareAs = DEFAULT_COMPARISON)
+	function __construct ($field, $orderType, $compareAs = DEFAULT_COMPARISON)
 	{
 		$this->field = $field;
 		$this->orderType = $orderType;
@@ -762,7 +774,9 @@ class Orderer {
 	 * @param mixed $orderBy	An OrderBy object or an array of them
 	 * @param array $rowSchema	Option row schema
 	 */
-	function Orderer($orderBy, $rowSchema = null) {
+	#function Orderer($orderBy, $rowSchema = null) 
+	function __construct ($orderBy, $rowSchema = null) 
+	{
 		if (!is_array($orderBy))
 			$orderBy = array($orderBy);
 		if ($rowSchema)

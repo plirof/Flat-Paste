@@ -1,5 +1,5 @@
 <?php
-
+//v211003 fixed deprecated constructors
 // Utilities for flatfile functions
 
 /** Constant to indicating a column holding floating point numbers */
@@ -18,7 +18,8 @@ class Column
 	/**
 	 * Create a new column object
 	 */
-	function Column($index, $type)
+	#function Column($index, $type)
+	function __construct ($index, $type)
 	{
 		$this->index = $index;
 		$this->type = $type;
@@ -28,7 +29,8 @@ class Column
 /** EXPERIMENTAL: Represent a column that is a foreign key.  Used for temporarily building tables array */
 class JoinColumn
 {
-	function JoinColumn($index, $tablename, $columnname)
+	#function JoinColumn($index, $tablename, $columnname)
+	function __construct ($index, $tablename, $columnname)
 	{
 		$this->index = $index;
 		$this->tablename = $tablename;
