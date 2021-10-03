@@ -1,5 +1,10 @@
 <?php
 /*
+Jonmod 211002a - changed function testRow ($tablerow, $rowSchema = null) { (to avoid warnings)
+
+*/
+
+/*
 Copyright (c) 2005 Luke Plant <L.Plant.98@cantab.net>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
@@ -562,7 +567,7 @@ class LikeWhereClause extends WhereClause
 		$this->regexp = '/^' . str_replace('%','.*', preg_quote($value)) . '$/i';
 	}
 	
-	function testRow ($tablerow) {
+	function testRow ($tablerow, $rowSchema = null) {
 		return preg_match($this->regexp, $tablerow[$this->field]);
 	}
 }
